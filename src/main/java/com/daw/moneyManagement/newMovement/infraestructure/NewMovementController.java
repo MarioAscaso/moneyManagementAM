@@ -4,7 +4,6 @@ import com.daw.moneyManagement.shared.domain.TypeMovement;
 import com.daw.moneyManagement.newMovement.application.NewMovementRequest;
 import com.daw.moneyManagement.newMovement.domain.NewMovementUseCase;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,11 +17,6 @@ public class NewMovementController {
 
     public NewMovementController(NewMovementUseCase newMovementUseCase) {
         this.newMovementUseCase = newMovementUseCase;
-    }
-
-    @GetMapping("/")
-    public String showNewMovementPage() {
-        return "index";
     }
 
     @PostMapping("/movements/new")

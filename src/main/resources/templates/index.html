@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestor de Dinero</title>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
 </head>
 
@@ -58,15 +57,13 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="concept">Concepto</label>
-                                        <input type="text" class="form-control" id="concept" name="concept"
-                                               placeholder="Ej: Factura de la luz" required>
+                                        <input type="text" class="form-control" id="concept" name="concept" placeholder="Ej: Factura de la luz" required>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="amount">Cantidad</label>
-                                                <input type="number" step="0.01" class="form-control" id="amount"
-                                                       name="amount" placeholder="0.00" required>
+                                                <input type="number" step="0.01" class="form-control" id="amount" name="amount" placeholder="0.00" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -94,6 +91,51 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Movimientos Recientes</h3>
+                            </div>
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>Concepto</th>
+                                        <th>Cantidad</th>
+                                        <th>Tipo</th>
+                                        <th>Fecha</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="mov : ${movements}">
+                                        <td th:text="${mov.concept}"></td>
+
+                                        <td th:text="${mov.type == MovementType.INCOME ? '+' : '-'} + ${#numbers.formatDecimal(mov.amount, 1, 'POINT', 2, 'COMMA')}"
+                                            th:classappend="${mov.type == MovementType.INCOME ? 'text-success' : 'text-danger'}">
+                                        </td>
+
+                                        <td>
+                                                <span th:text="${mov.type == MovementType.INCOME ? 'Ingreso' : 'Gasto'}"
+                                                      th:classappend="${mov.type == MovementType.INCOME ? 'badge badge-success' : 'badge badge-danger'}">
+                                                </span>
+                                        </td>
+
+                                        <td th:text="${#temporals.format(mov.date, 'dd-MM-yyyy')}"></td>
+
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr th:if="${#lists.isEmpty(movements)}">
+                                        <td colspan="5" class="text-center">No hay movimientos registrados.</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
