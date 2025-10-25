@@ -3,11 +3,12 @@ package com.daw.moneyManagement.shared.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
+//@NoArgsConstructor
 @Entity
 @Table(name = "movements")
 public class Movement {
@@ -22,6 +23,29 @@ public class Movement {
 
     @Enumerated(EnumType.STRING)
     private TypeMovement type;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getConcept() {
+        return concept;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public TypeMovement getType() {
+        return type;
+    }
+
+    protected Movement() {
+    }
 
     public Movement(String concept, BigDecimal amount, LocalDate date, TypeMovement type) {
         if (amount.compareTo(BigDecimal.ZERO) < 0) {
