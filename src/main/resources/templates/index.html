@@ -129,6 +129,12 @@
                                                 <i class="fas fa-edit"></i> Modificar
                                             </a>
 
+                                            <form th:action="@{/movements/delete}" method="post" class="d-inline">
+                                                <input type="hidden" name="id" th:value="${mov.id}" />
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i> Eliminar
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                     <tr th:if="${#lists.isEmpty(movements)}">
