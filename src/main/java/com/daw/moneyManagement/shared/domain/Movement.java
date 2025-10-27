@@ -44,6 +44,25 @@ public class Movement {
         return type;
     }
 
+    public void setConcept(String concept) {
+        this.concept = concept;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("LA CANTIDAD NO PUEDE SER NEGATIVA");
+        }
+        this.amount = amount;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setType(TypeMovement type) {
+        this.type = type;
+    }
+
     protected Movement() {
     }
 
